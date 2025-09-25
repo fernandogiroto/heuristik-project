@@ -1,8 +1,8 @@
-<h1>Anime Explorer</h1>
+<h1>Heuristik - Anime Explorer</h1>
 
 <img src="public/images/readme.jpg" alt="Anime Explorer" style="width:100%; max-width:800px; margin-bottom:20px;" />
 
-<p>Anime Explorer is a web application to explore anime, displaying detailed information and episodes for each anime using the public <a href="https://jikan.moe/" target="_blank">Jikan API</a>. The app is built with Vue 3, Nuxt 3, PrimeVue, and TypeScript, following performance best practices, unit testing, and strict type safety.</p>
+<p>Anime Explorer is a web application to explore anime, displaying detailed information and episodes for each anime using the public <a href="https://jikan.moe/" target="_blank">Jikan API</a>. The app is built with Vue 3, Nuxt 3, and TypeScript, following performance best practices, unit testing, and strict type safety.</p>
 
 <h2>Features</h2>
 <ul>
@@ -36,6 +36,36 @@
   <li><strong>SCSS / SASS</strong> for styling</li>
   <li><strong>Vitest</strong> for unit testing</li>
 </ul>
+
+<h2>Project Structure</h2>
+<pre>
+.
+├── pages/
+│   ├── index.vue            # Anime listing page
+│   └── anime/
+│       └── [id].vue         # Anime details page
+├── layouts/
+│   ├── default.vue          # Default layout
+│   └── header.vue           # Header component
+├── services/
+│   ├── api.ts               # Axios instance
+│   └── animes.ts            # API calls for anime & episodes
+├── types/
+│   └── anime.ts             # TypeScript types
+├── components/
+│   └── animeList.vue        # Anime card list component
+├── scss/
+│   ├── variables.scss
+│   └── mixings.scss
+├── helpers/
+│   └── dateFormat.ts
+├── tests/
+│   ├── animeList.spec.ts
+│   ├── animeDetails.spec.ts
+│   └── animesService.spec.ts
+├── nuxt.config.ts
+└── package.json
+</pre>
 
 <h2>Installation</h2>
 <pre><code>git clone &lt;your-repo-url&gt;
