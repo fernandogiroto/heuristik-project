@@ -17,15 +17,15 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@primevue/nuxt-module' // <- módulo do PrimeVue
+    '@primevue/nuxt-module' 
   ],
 
   primevue: {
     options: {
-      ripple: true,             // efeito ripple global
-      theme: { preset: Aura },  // tema Aura
+      ripple: true,             
+      theme: { preset: Aura }, 
       inputVariant: 'filled'
     },
-    autoImport: true             // registra os componentes automaticamente
+    autoImport: true            
   }
 })
