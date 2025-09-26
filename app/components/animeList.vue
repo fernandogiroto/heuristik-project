@@ -31,13 +31,12 @@
       </template>
     </Card>
   </div>
-  <Paginator
-    v-model:page="page"
-    :rows="rows"
-    :totalRecords="totalRecords"
-    @page="onPageChange"
-    v-if="!loading"
-  />
+    <Paginator
+      v-model:page="page"
+      :rows="rows"
+      :totalRecords="totalRecords"
+      @page="onPageChange"
+    />
 </template>
 
 
