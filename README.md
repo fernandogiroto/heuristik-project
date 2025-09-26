@@ -2,7 +2,7 @@
 
 <img src="public/images/readme.jpg" alt="Anime Explorer" style="width:100%; max-width:800px; margin-bottom:20px;" />
 
-<p>Anime Explorer is a web application to explore anime, displaying detailed information and episodes for each anime using the public <a href="https://jikan.moe/" target="_blank">Jikan API</a>. The app is built with Vue 3, Nuxt 3 and TypeScript, following performance best practices, unit testing, and strict type safety.</p>
+<p>Anime Explorer is a web application to explore anime, displaying detailed information and episodes for each anime using the public <a href="https://jikan.moe/" target="_blank">Jikan API</a>. The app is built with Vue 3, Nuxt 3 and TypeScript, following performance best practices, unit testing, and strict type safety. You can check it live on <a href="https://heuristik-project.vercel.app/" target="_blank">Vercel</a>.</p>
 
 <h2>Features</h2>
 <ul>
