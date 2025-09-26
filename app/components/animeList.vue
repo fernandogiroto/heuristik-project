@@ -106,6 +106,7 @@
   }
 
 .card-anime {
+  width: 100%;
   cursor: pointer;
   transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
               box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
@@ -137,15 +138,10 @@
     text-overflow: ellipsis;
   }
 
-  /* mobile-first (100% em telas pequenas) */
-  width: 100%;
-
-  /* tablets médios (2 colunas) */
+  
   @media (min-width: variables.$lg-breakpoint) {
     width: 45%;
   }
-
-  /* desktops grandes (3 colunas) */
   @media (min-width: variables.$xl-breakpoint) {
     width: 30%;
   }
