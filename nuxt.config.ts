@@ -1,5 +1,3 @@
-// nuxt.config.ts
-
 import Aura from '@primeuix/themes/aura'
 
 export default defineNuxtConfig({
@@ -17,15 +15,16 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    '@primevue/nuxt-module' 
+    '@primevue/nuxt-module'
   ],
 
   primevue: {
     options: {
-      ripple: true,             
-      theme: { preset: Aura }, 
+      ripple: true,
+      theme: { preset: Aura },
       inputVariant: 'filled'
     },
-    autoImport: true            
-  }
+    autoImport: true
+  },
+  test: true
 })

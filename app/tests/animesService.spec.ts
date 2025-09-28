@@ -43,4 +43,9 @@ describe('anime service', () => {
     expect(api.get).toHaveBeenCalledWith('/anime/3/episodes/2')
     expect(res).toEqual(mockEpisodesResponse)
   })
+
+  it('throws error when API fails', async () => {
+    (api.get as unknown as vi.Mock).mockRejectedValue(new Error('Network error'))
+    await expect(animeService.getAnimes(1, 9)).rejects.toThrow('Network error')
+  })
 })

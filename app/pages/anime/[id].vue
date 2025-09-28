@@ -52,17 +52,17 @@
 </template>
 
 <script setup lang="ts">
-
-  import { ref, onMounted} from 'vue'
+  import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router' // ✅ ADICIONAR ESTA IMPORT
   import { getAnimeById, getEpisodes } from '@/services/animes'
   import type { Anime, Episode } from '@/types/anime'
-  import {formatDate} from '@/helpers/dateFormat'
+  import { formatDate } from '@/helpers/dateFormat'
 
   import DataTable from 'primevue/datatable'
   import Column from 'primevue/column'
   import Rating from 'primevue/rating'
 
-  const route = useRoute()
+  const route = useRoute() // ✅ AGORA ESTÁ CORRETO
 
   const id = Number(route.params.id)
   const anime = ref<Anime | null>(null)
@@ -82,7 +82,6 @@
 </script>
 
 <style lang="scss">
-
   @use '@/scss/mixings';
   @use '@/scss/variables';
 

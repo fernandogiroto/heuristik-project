@@ -40,17 +40,16 @@
     />
 </template>
 
-
 <script setup lang="ts">
-
   import { ref, onMounted } from 'vue'
+  import { useRouter } from 'vue-router' // ✅ ADICIONAR ESTA IMPORT
   import { getAnimes } from '@/services/animes'
   import type { Anime } from '@/types/anime'
 
   import Card from 'primevue/card'
   import Paginator from 'primevue/paginator'
 
-  const router = useRouter()
+  const router = useRouter() // ✅ AGORA ESTÁ CORRETO
 
   const animes = ref<Anime[]>([])
   const page = ref(1)      
@@ -85,11 +84,9 @@
   }
 
   onMounted(() => loadAnimes())
-  
 </script>
 
 <style lang="scss">
-
   @use '@/scss/mixings';
   @use '@/scss/variables';
 
@@ -105,47 +102,44 @@
     }
   }
 
-.card-anime {
-  width: 100%;
-  cursor: pointer;
-  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
-  }
-
-  &__image {
+  .card-anime {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px 12px 0 0;
-  }
+    cursor: pointer;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
 
-  &__subtitle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-  }
+    &:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    }
 
-  &--synopsis {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;  
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+    &__image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
 
-  
-  @media (min-width: variables.$lg-breakpoint) {
-    width: 45%;
-  }
-  @media (min-width: variables.$xl-breakpoint) {
-    width: 30%;
-  }
-}
+    &__subtitle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 5px;
+    }
 
+    &--synopsis {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;  
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
+    @media (min-width: variables.$lg-breakpoint) {
+      width: 45%;
+    }
+    @media (min-width: variables.$xl-breakpoint) {
+      width: 30%;
+    }
+  }
 </style>

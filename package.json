@@ -7,7 +7,10 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@primeuix/themes": "^1.2.3",
@@ -20,8 +23,12 @@
   },
   "devDependencies": {
     "@primevue/nuxt-module": "^4.3.9",
+    "@testing-library/vue": "^8.1.0",
     "@types/node": "^24.5.2",
     "@vue/test-utils": "^2.4.6",
-    "sass": "^1.93.2"
+    "flush-promises": "^1.0.2",
+    "jsdom": "^27.0.0",
+    "sass": "^1.93.2",
+    "vitest": "^3.2.4"
   }
 }
