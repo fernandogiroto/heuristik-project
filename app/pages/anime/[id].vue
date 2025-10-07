@@ -1,5 +1,5 @@
 <template>
-  <div v-if="anime" class="anime-details">
+  <div class="anime-details" v-if="anime" >
     <div
       class="anime-details__header"
       :style="{ backgroundImage: `url(${anime?.images?.jpg?.image_url})` }"
@@ -11,40 +11,49 @@
         </p>
       </div>
     </div>
-    <div class="anime-details__content">
-      <h1 class="anime-details__content--title">Description</h1>
-      <span class="anime-details__content--descripition">{{ anime?.synopsis }}</span>
-      <DataTable class="anime-details__content--list" :value="episodes" v-if="episodes?.length">
-        <Column field="mal_id" header="Episode" />
-        <Column field="title" header="Title" />
-        <Column field="score" header="Score" class="anime-details__content--rating">
-          <template #body="slotProps">
-            <Rating
-              :modelValue="slotProps.data.score"
-              :readonly="true"
-              :stars="5"
-              :cancel="false"
-            />
-          </template>
-        </Column>
-        <Column field="aired" header="Aired">
-          <template #body="slotProps">
-            {{ formatDate(slotProps.data.aired) }}
-          </template>
-        </Column>
-        <Column field="url" header="Watch">
-          <template #body="slotProps">
-            <a 
-              :href="slotProps.data.url" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="p-button p-component">
-              Watch Episode
-            </a>
-          </template>
-        </Column>
-      </DataTable>
-    </div>
+    <Suspense>
+      <template #fallback>
+        <div class="anime-details__loading">
+          <ProgressSpinner />
+        </div>
+      </template>
+      <template #default>
+        <div class="anime-details__content" v-if="anime">
+          <h1 class="anime-details__content--title">Description</h1>
+          <span class="anime-details__content--descripition">{{ anime?.synopsis }}</span>
+          <DataTable class="anime-details__content--list" :value="episodes" v-if="episodes?.length">
+            <Column field="mal_id" header="Episode" />
+            <Column field="title" header="Title" />
+            <Column field="score" header="Score" class="anime-details__content--rating">
+              <template #body="slotProps">
+                <Rating
+                  :modelValue="slotProps.data.score"
+                  :readonly="true"
+                  :stars="5"
+                  :cancel="false"
+                />
+              </template>
+            </Column>
+            <Column field="aired" header="Aired">
+              <template #body="slotProps">
+                {{ formatDate(slotProps.data.aired) }}
+              </template>
+            </Column>
+            <Column field="url" header="Watch">
+              <template #body="slotProps">
+                <a 
+                  :href="slotProps.data.url" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="p-button p-component">
+                  Watch Episode
+                </a>
+              </template>
+            </Column>
+          </DataTable>
+        </div>
+      </template>
+    </Suspense>
   </div>
   <div class="anime-details__loading" v-else>
     <ProgressSpinner />
@@ -69,6 +78,7 @@
   const id = Number(route.params.id)
   const anime = ref<Anime | null>(null)
   const episodes = ref<Episode[]>([])
+  const loading = ref(true)
 
   onMounted(async () => {
     try {
@@ -77,6 +87,7 @@
 
       const resEpisodes = await getEpisodes(id)
       episodes.value = resEpisodes.data.data as Episode[]
+      loading.value = false
     } catch (err) {
       console.error('Error loading anime or episodes:', err)
     }
