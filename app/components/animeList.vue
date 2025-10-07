@@ -41,8 +41,8 @@
       v-if="animes.length && !loading"
     />
    </div>
-   <div class="animes-loading">
-    <ProgressSpinner v-if="loading"/>
+   <div class="animes-loading" v-if="loading">
+    <ProgressSpinner />
    </div>
 </template>
 
