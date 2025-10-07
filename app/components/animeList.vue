@@ -1,5 +1,6 @@
 <template>
   <div class="animes">
+    <div class="animes-list" v-if="!loading">
     <Card
       class="card-anime"
       v-for="anime in animes"
@@ -30,25 +31,30 @@
         <span class="card-anime--synopsis" v-text="anime.synopsis" />
       </template>
     </Card>
-  </div>
+   </div>
     <Paginator
       v-model:page="page"
       :rows="rows"
       :totalRecords="totalRecords"
       :page-link-size="3"
       @page="onPageChange"
-      v-if="animes.length"
+      v-if="animes.length && !loading"
     />
+   </div>
+   <div class="animes-loading">
+    <ProgressSpinner v-if="loading"/>
+   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
-  import { useRouter } from 'vue-router' // ✅ ADICIONAR ESTA IMPORT
+  import { useRouter } from 'vue-router' 
   import { getAnimes } from '@/services/animes'
   import type { Anime } from '@/types/anime'
 
   import Card from 'primevue/card'
   import Paginator from 'primevue/paginator'
+  import ProgressSpinner from 'primevue/progressspinner';
 
   const router = useRouter()
 
@@ -92,14 +98,22 @@
   @use '@/scss/variables';
 
   .animes {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 50px;
-    flex-wrap: wrap;
-    @media (max-width: variables.$md-breakpoint) {
-      flex-direction: column;
-      gap: 35px;
+    @include mixings.flexbox(column, space-between, center);
+    gap: 3rem;
+    &-list {
+      @include mixings.flexbox(row, space-between, flex-start);
+      gap: 50px;
+      width: 100%;
+      flex-wrap: wrap;
+      @media (max-width: variables.$md-breakpoint) {
+        flex-direction: column;
+        gap: 35px;
+      }
+    }
+    &-loading {
+      @include mixings.flexbox(row, center, center);
+      height: 100%;
+      width: 100%;
     }
   }
 
@@ -130,7 +144,8 @@
 
     &--synopsis {
       display: -webkit-box;
-      -webkit-line-clamp: 3;  
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
       -webkit-box-orient: vertical;  
       overflow: hidden;
       text-overflow: ellipsis;

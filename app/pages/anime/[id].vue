@@ -46,14 +46,14 @@
       </DataTable>
     </div>
   </div>
-  <div v-else>
-    <p>Carregando...</p>
+  <div class="anime-details__loading" v-else>
+    <ProgressSpinner />
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, onMounted } from 'vue'
-  import { useRoute } from 'vue-router' // ✅ ADICIONAR ESTA IMPORT
+  import { useRoute } from 'vue-router'
   import { getAnimeById, getEpisodes } from '@/services/animes'
   import type { Anime, Episode } from '@/types/anime'
   import { formatDate } from '@/helpers/dateFormat'
@@ -61,8 +61,10 @@
   import DataTable from 'primevue/datatable'
   import Column from 'primevue/column'
   import Rating from 'primevue/rating'
+  import ProgressSpinner from 'primevue/progressspinner';
 
-  const route = useRoute() // ✅ AGORA ESTÁ CORRETO
+
+  const route = useRoute() 
 
   const id = Number(route.params.id)
   const anime = ref<Anime | null>(null)
@@ -136,6 +138,11 @@
         margin-top: 1.5rem;
         width: 100%;
       }
+    }
+    &__loading{
+      @include mixings.flexbox(row, center, center);
+      height: 100vh;
+      width: 100%;
     }
   }
 </style>
