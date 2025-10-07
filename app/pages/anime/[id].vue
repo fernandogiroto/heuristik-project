@@ -17,7 +17,7 @@
       <DataTable class="anime-details__content--list" :value="episodes" v-if="episodes?.length">
         <Column field="mal_id" header="Episode" />
         <Column field="title" header="Title" />
-        <Column field="score" header="Score">
+        <Column field="score" header="Score" class="anime-details__content--rating">
           <template #body="slotProps">
             <Rating
               :modelValue="slotProps.data.score"
@@ -137,6 +137,11 @@
       &--list{
         margin-top: 1.5rem;
         width: 100%;
+      }
+      &--rating{
+        @media (max-width: variables.$md-breakpoint) {
+          display: none;
+        }
       }
     }
     &__loading{
