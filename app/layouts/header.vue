@@ -1,28 +1,43 @@
 <template>
   <div class="header">
-    <NuxtLink to="/" class="hover:underline">
+    <NuxtLink to="/">
       <img class="header__logo" src="@/assets/images/logo.svg" alt="Heuristik Logo" />
     </NuxtLink>
+
     <nav class="header__menu">
-      <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
+      <NuxtLink to="/">Home</NuxtLink>
       <a href="https://www.fernandogiroto.com" target="_blank" rel="noopener noreferrer">My Portfolio</a>
       <a href="https://github.com/fernandogiroto" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://www.linkedin.com/in/fernandogiroto/" target="_blank" rel="noopener noreferrer">My Linkedin</a>
     </nav>
-    <Button class="header__menu--hamburguer" type="button" icon="pi pi-ellipsis-v" @click="toggle" aria-haspopup="true" aria-controls="overlay_menu" />
-    <Menu ref="menu" id="overlay_menu" :model="items" :popup="true" />
+
+    <Button
+      v-if="isClient"
+      class="header__menu--hamburguer"
+      type="button"
+      icon="pi pi-ellipsis-v"
+      @click="toggle"
+      aria-haspopup="true"
+      aria-controls="overlay_menu"
+    />
+    <Menu v-if="isClient" ref="menu" id="overlay_menu" :model="items" :popup="true" />
   </div>
 </template>
 
 <script setup lang="ts">
 
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import Menu from 'primevue/menu'
   import Button from 'primevue/button'
 
   const router = useRouter()
   const menu = ref<any>(null)
+  const isClient = ref(false)
+
+  onMounted(() => {
+    isClient.value = true
+  })
 
   const items = [
     { label: 'Home', icon: 'pi pi-home', command: () => router.push('/') },
@@ -32,9 +47,8 @@
   ]
 
   const toggle = (event: Event) => menu.value?.toggle(event)
-
+  
 </script>
-
 
 <style lang="scss">
   @use '@/scss/mixings';

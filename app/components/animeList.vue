@@ -37,6 +37,7 @@
       :totalRecords="totalRecords"
       :page-link-size="3"
       @page="onPageChange"
+      v-if="animes.length"
     />
 </template>
 
@@ -49,7 +50,7 @@
   import Card from 'primevue/card'
   import Paginator from 'primevue/paginator'
 
-  const router = useRouter() // ✅ AGORA ESTÁ CORRETO
+  const router = useRouter()
 
   const animes = ref<Anime[]>([])
   const page = ref(1)      
